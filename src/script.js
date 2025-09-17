@@ -69,11 +69,8 @@ function start() {
   };
   let yname;
   let symbol = "o";
-  let players = GameBoard.players(yname == "" ? "Player-1" : yname, symbol);
-  let player = players.getNewPlayer();
-  let computer = players.getComputer();
-  
-  function cellManipulation(){
+
+  function mainGamePlayUI(player, computer) {
     const getCell = document.querySelectorAll(".row .col i");
     getCell.forEach((cell) => {
       cell.addEventListener("click", () => {
@@ -93,23 +90,35 @@ function start() {
     });
   }
 
-  function play() {
+  function playerInput() {
+    // manipulating the modals
     const dialogWelcome = document.querySelector(".welcome");
     const dialogContianer = document.querySelector(".container");
-    const playBtn = document.querySelector(".welcome>#form");
-    
-    playBtn.addEventListener("submit", (e)=> {
+    // form
+    const form = document.querySelector(".welcome>#form");
+    // form inputs
+    const select = document.querySelector("#symbols");
+    const yname = document.querySelector("#name");
+
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
       dialogWelcome.classList.add("animation");
-      dialogWelcome.classList.add('hide');
-      dialogContianer.classList.add('show');
-
+      dialogWelcome.classList.add("hide");
+      dialogContianer.classList.add("show");
+      symbol = select.value;
+      const players = GameBoard.players(
+        yname.textContent == "" ? "Player-1" : yname.textContent,
+        symbol
+      );
+      let player = players.getNewPlayer();
+      let computer = players.getComputer();
+      mainGamePlayUI(player, computer);
     });
   }
 
   // Add all the functions
-  play();
-  cellManipulation();
+  playerInput();
+  
 }
 
 window.onload = start;
