@@ -39,15 +39,19 @@ body {
 }
 
 .col{
-    cursor:pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    cursor: pointer;
     width: calc(100%/3);
     text-align: center;
     height: 100%;
 }
 
+.col i{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
 .col:nth-child(2){
     border-right: 2px solid white;
     border-left: 2px solid white;
@@ -56,9 +60,4 @@ body {
 
 .col:active{
     color: red;
-}
-
-.col:hover{
-    color: yellow;
-    background-color: white;
 }
