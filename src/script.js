@@ -70,8 +70,15 @@ function start() {
   let yname;
   let symbol = "o";
 
-  function mainGamePlayUI(player, computer) {
+  function mainGamePlayUI(yname, symbol) {
+    const players = GameBoard.players(
+      yname.textContent == "" ? "Player-1" : yname.textContent,
+      symbol
+    );
+    let player = players.getNewPlayer();
+    let computer = players.getComputer();
     const getCell = document.querySelectorAll(".row .col i");
+    
     getCell.forEach((cell) => {
       cell.addEventListener("click", () => {
         if (cell.textContent == "")
@@ -106,19 +113,12 @@ function start() {
       dialogWelcome.classList.add("hide");
       dialogContianer.classList.add("show");
       symbol = select.value;
-      const players = GameBoard.players(
-        yname.textContent == "" ? "Player-1" : yname.textContent,
-        symbol
-      );
-      let player = players.getNewPlayer();
-      let computer = players.getComputer();
-      mainGamePlayUI(player, computer);
+      mainGamePlayUI(yname, symbol);
     });
   }
 
   // Add all the functions
   playerInput();
-  
 }
 
 window.onload = start;
