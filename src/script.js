@@ -104,6 +104,8 @@ function start() {
       dialogContianer.classList.add('show');
     });
   }
+
+  // Add all the functions
   play();
   cellManipulation();
 }
