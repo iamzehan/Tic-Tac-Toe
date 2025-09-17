@@ -52,7 +52,7 @@ body > .welcome {
   border: none;
   border-radius: 2em;
   box-shadow: 0 0 5px white;
-  background-color: white;
+  color: white;
   animation: 0.3s popUp ease-out forwards;
 }
 
@@ -68,13 +68,12 @@ body > .welcome {
     display: grid;
     gap: 1em;
     grid-template-columns: 1fr 2fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 4fr;
     
 }
 
 #form label{
     text-align: right;
-    font-weight: bold;
     align-self: center;
 }
 
@@ -85,7 +84,8 @@ body > .welcome {
     padding: 0 0.5em;
     align-self: center;
     border: 0;
-    box-shadow: 0 1px 4px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.479);
     transition: 0.3s box-shadow ease-in-out;
 }
 #form select {
@@ -95,15 +95,14 @@ body > .welcome {
 }
 
 select {
-  border: 2px solid #dddddd;
-  background: #eeeeee;
+  background: rgba(0, 0, 0, 0.493);
   transition: 0.4s;
   padding: 0 0.5em;
 }
 
 #form input:hover, select:hover,
 input:focus, select:focus {
-  background: #dddddd;
+  background: rgba(0, 0, 0, 0.493);
   border: 0.01em solid red;
   box-shadow: 0 0 5px 0 red;
  
@@ -112,7 +111,6 @@ input:focus, select:focus {
 select,::picker(select) {
   appearance: base-select;
   border: none;
-  box-shadow: 0 1px 4px;
   border-radius: 0.1em;
 }
 
