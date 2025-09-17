@@ -20,7 +20,6 @@ body {
   background-color: var(--bg-color);
 }
 
-
 .container {
   display: none;
 }
@@ -37,8 +36,8 @@ body {
   border-radius: 2em;
   box-shadow: 0 0 5px white;
   padding: 2em;
-animation: 0.3s popUp ease-in forwards;
-    z-index: 1;
+  animation: 0.3s popUp ease-in forwards;
+  z-index: 1;
 }
 
 body > .welcome {
@@ -56,42 +55,63 @@ body > .welcome {
   animation: 0.3s popUp ease-out forwards;
 }
 
-.welcome.animation{
-    animation: 1s popOut ease-out forwards;
+.welcome.animation {
+  animation: 1s popOut ease-out forwards;
 }
 
-.welcome.animation.hide{
-    display: none;
+.welcome.animation.hide {
+  display: none;
+}
+
+.welcome h2 {
+  font-family: "Press Start 2P", sans-serif;
 }
 
 #form {
-    display: grid;
-    gap: 1em;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: 1fr 1fr 4fr;
-    
+  display: grid;
+  gap: 1em;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 1fr 4fr;
 }
 
-#form label{
-    text-align: right;
-    align-self: center;
+.welcome .logo {
+  background-color: rgba(255, 0, 0, 0.336);
+  padding: 1em;
+  height: 4em;
+  width: 4em;
+  border-radius: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px white;
+}
+.logo > span {
+  color: red;
+  font-size: 30px;
+  text-shadow: 0 0 3px red;
 }
 
-#form input, select{
-    cursor: default;
-    border-radius: 0.2em;
-    height: 2.5em;
-    padding: 0 0.5em;
-    align-self: center;
-    border: 0;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.479);
-    transition: 0.3s box-shadow ease-in-out;
+#form label {
+  text-align: right;
+  align-self: center;
+}
+
+#form input,
+select {
+  cursor: default;
+  border-radius: 0.2em;
+  height: 2.5em;
+  padding: 0 0.5em;
+  align-self: center;
+  border: 0;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.479);
+  transition: 0.3s box-shadow ease-in-out;
 }
 #form select {
-    text-align: center;
-    font-size: 1.5rem;
-    height: max-content;
+  text-align: center;
+  font-size: 1.5rem;
+  height: max-content;
 }
 
 select {
@@ -100,38 +120,41 @@ select {
   padding: 0 0.5em;
 }
 
-#form input:hover, select:hover,
-input:focus, select:focus {
+#form input:hover,
+select:hover,
+input:focus,
+select:focus {
   background: rgba(0, 0, 0, 0.493);
   border: 0.01em solid red;
   box-shadow: 0 0 5px 0 red;
- 
 }
 
-select,::picker(select) {
+select,
+::picker(select) {
   appearance: base-select;
   border: none;
   border-radius: 0.1em;
 }
 
-::picker(select){
-    border-radius: 0.25em;
-    box-shadow: 0 0 5px 0 red;
+::picker(select) {
+  border-radius: 0.25em;
+  box-shadow: 0 0 5px 0 red;
 }
-option:hover{
-    background-color: rgba(255, 0, 0, 0.24);
+option:hover {
+  background-color: rgba(255, 0, 0, 0.24);
 }
-#form input:focus, select:focus{
-    border: 0;
-    outline: 1px solid red;
-    box-shadow: 0 0 5px 0 red;
+#form input:focus,
+select:focus {
+  border: 0;
+  outline: 1px solid red;
+  box-shadow: 0 0 5px 0 red;
 }
 
 .welcome > #form .btn {
-    grid-column: 1/span 2;
-    align-self: center;
+  grid-column: 1 / span 2;
+  align-self: center;
 }
- .welcome > #form .play {
+.welcome > #form .play {
   justify-self: center;
   background-color: red;
   width: 100px;
@@ -147,11 +170,10 @@ option:hover{
   text-shadow: 0 0 5px lightcoral;
   transition: 0.5s color ease, 0.5s background-color ease-in-out;
 }
-.welcome > #form .play:hover{
-    background-color: transparent;
-    color: red;
-    text-shadow: 0 0 5px;
-    
+.welcome > #form .play:hover {
+  background-color: transparent;
+  color: red;
+  text-shadow: 0 0 5px;
 }
 
 .row {
@@ -190,10 +212,9 @@ option:hover{
   color: red;
 }
 
-.col i:hover{
-    box-shadow: inset 0 0 15px 15px rgba(0, 255, 55, 0.2);
+.col i:hover {
+  box-shadow: inset 0 0 15px 15px rgba(0, 255, 55, 0.2);
 }
-
 
 @keyframes popUp {
   from {
