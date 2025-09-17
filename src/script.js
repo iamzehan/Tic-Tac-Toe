@@ -72,23 +72,40 @@ function start() {
   let players = GameBoard.players(yname == "" ? "Player-1" : yname, symbol);
   let player = players.getNewPlayer();
   let computer = players.getComputer();
-  const getCell = document.querySelectorAll(".row .col i");
-  getCell.forEach((cell) => {
-    cell.addEventListener("click", () => {
-      if (cell.textContent == "")
-        cell.textContent = symbolReference[player.symbol];
+  
+  function cellManipulation(){
+    const getCell = document.querySelectorAll(".row .col i");
+    getCell.forEach((cell) => {
+      cell.addEventListener("click", () => {
+        if (cell.textContent == "")
+          cell.textContent = symbolReference[player.symbol];
+      });
+      cell.addEventListener("mouseover", () => {
+        if (
+          (cell.textContent == "") |
+          (cell.textContent == symbolReference[player.symbol])
+        ) {
+          cell.style.cursor = pointer;
+        } else {
+          cell.style.cursor = "no-drop";
+        }
+      });
     });
-    cell.addEventListener("mouseover", () => {
-      if (
-        (cell.textContent == "") |
-        (cell.textContent == symbolReference[player.symbol])
-      ) {
-        cell.style.cursor = pointer;
-      } else {
-        cell.style.cursor = "no-drop";
-      }
+  }
+
+  function play() {
+    const dialogWelcome = document.querySelector(".welcome");
+    const dialogContianer = document.querySelector(".container");
+    const playBtn = document.querySelector(".welcome>button.play");
+    
+    playBtn.addEventListener("click", ()=> {
+      dialogWelcome.classList.add("animation");
+      dialogWelcome.classList.add('hide');
+      dialogContianer.classList.add('show');
     });
-  });
+  }
+  play();
+  cellManipulation();
 }
 
 window.onload = start;
