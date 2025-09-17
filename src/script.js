@@ -67,8 +67,6 @@ function start() {
     x: "close",
     o: "circle",
   };
-  let yname;
-  let symbol = "o";
 
   function mainGamePlayUI(yname, symbol) {
     const players = GameBoard.players(
@@ -78,7 +76,7 @@ function start() {
     let player = players.getNewPlayer();
     let computer = players.getComputer();
     const getCell = document.querySelectorAll(".row .col i");
-    
+
     getCell.forEach((cell) => {
       cell.addEventListener("click", () => {
         if (cell.textContent == "")
@@ -112,11 +110,10 @@ function start() {
       dialogWelcome.classList.add("animation");
       dialogWelcome.classList.add("hide");
       dialogContianer.classList.add("show");
-      symbol = select.value;
+      let symbol = select.value;
       mainGamePlayUI(yname, symbol);
     });
   }
-
   // Add all the functions
   playerInput();
 }
