@@ -61,3 +61,28 @@ function are2DArraysEqual(arr1, arr2) {
   }
   return true; // All elements match
 }
+
+
+// We can create a new game
+const yname = prompt("Please enter your name: ");
+const symbol = ["x", "o"][
+  parseInt(prompt("1. x \n2. o\nEnter your symbol: ")) - 1
+];
+let players = GameBoard.players(yname == "" ? "Player-1" : yname, symbol);
+let player = players.getNewPlayer();
+let computer = players.getComputer();
+
+console.log(player, computer);
+// We can get a new board in every round
+for (let round = 1; round <= 5; round++) {
+  // with every round now I can get a fresh board
+  let board = GameBoard.getFreshBoard();
+  console.log("Start of Round - ", round);
+  console.log(board);
+  board[0][0] = player.symbol;
+  board[0][1] = computer.symbol;
+  console.log(board);
+  console.log("End of Round - ", round);
+}
+
+// console.log(player, computer, board);
