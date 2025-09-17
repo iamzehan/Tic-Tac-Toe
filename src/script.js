@@ -109,10 +109,10 @@ function start() {
 
   function playerInput() {
     // manipulating the modals
-    const dialogWelcome = document.querySelector(".welcome");
+    const dialoglanding = document.querySelector(".landing");
     const dialogContianer = document.querySelector(".container");
     // form
-    const form = document.querySelector(".welcome>#form");
+    const form = document.querySelector(".landing>#form");
     // form inputs
     const select = document.querySelector("#symbols");
     const yname = document.querySelector("#input-name");
@@ -121,8 +121,8 @@ function start() {
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      dialogWelcome.classList.add("animation");
-      dialogWelcome.classList.add("hide");
+      dialoglanding.classList.add("animation");
+      dialoglanding.classList.add("hide");
       dialogContianer.classList.add("show");
       info.forEach((e) => e.classList.add("show"));
       
