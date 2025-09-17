@@ -63,17 +63,6 @@ body > .welcome {
   display: none;
 }
 
-.welcome h2 {
-  font-family: "Press Start 2P", sans-serif;
-}
-
-#form {
-  display: grid;
-  gap: 1em;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: 1fr 1fr 4fr;
-}
-
 .welcome .logo {
   background-color: rgba(255, 0, 0, 0.336);
   padding: 1em;
@@ -83,12 +72,27 @@ body > .welcome {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 5px white;
+  box-shadow: inset 5px -5px 12px 5px rgba(255, 255, 255, 0.281),
+  inset 12px 12px 10px 1px rgba(255, 255, 255, 0.24),
+  inset 12px 12px 3px 2px rgba(255, 255, 255, 0.123),
+  inset -1px -1px 1px 1px rgba(255, 255, 255, 0.123);
 }
+
 .logo > span {
-  color: red;
   font-size: 30px;
-  text-shadow: 0 0 3px red;
+  animation: glowNeon 1s infinite alternate;
+}
+
+.welcome h2 {
+  font-family: "Press Start 2P", sans-serif;
+  animation: glowNeon 0.3s infinite linear;
+}
+
+#form {
+  display: grid;
+  gap: 1em;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 1fr 4fr;
 }
 
 #form label {
@@ -236,4 +240,15 @@ select:focus {
     opacity: 0;
     transform: scale(0);
   }
+}
+
+@keyframes glowNeon {
+    from { 
+    color: white;
+    text-shadow: 0 0 10px red;
+    }
+    to {
+    color: red;
+    text-shadow: 0 0 5px red;
+    }
 }
