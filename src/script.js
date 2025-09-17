@@ -96,12 +96,14 @@ function start() {
   function play() {
     const dialogWelcome = document.querySelector(".welcome");
     const dialogContianer = document.querySelector(".container");
-    const playBtn = document.querySelector(".welcome>button.play");
+    const playBtn = document.querySelector(".welcome>#form");
     
-    playBtn.addEventListener("click", ()=> {
+    playBtn.addEventListener("submit", (e)=> {
+      e.preventDefault();
       dialogWelcome.classList.add("animation");
       dialogWelcome.classList.add('hide');
       dialogContianer.classList.add('show');
+
     });
   }
 

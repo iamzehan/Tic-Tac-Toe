@@ -39,11 +39,21 @@
 
     <div class="welcome">
       <h2>Let's play the game</h2>
-      <button class="play">
-        Play
-        <i class="material-symbols-outlined">play_arrow</i>
-        
-      </button>
+      <form action="" id="form">
+        <label for="name">Name:</label>
+        <input type="text" name="name" placeholder="Your name" />
+        <label for="symbols">Select Symbol:</label>
+        <select name="symbols" id="">
+          <option value="x">x</option>
+          <option value="o">o</option>
+        </select>
+        <div class="btn">
+          <button class="play" type="submit">
+            Play
+            <i class="material-symbols-outlined">play_arrow</i>
+          </button>
+        </div>
+      </form>
     </div>
   </body>
 </html>
