@@ -15,29 +15,10 @@
 body {
   height: 100vh;
   display: flex;
+  gap: 2em;
   align-items: center;
   justify-content: center;
   background-color: var(--bg-color);
-}
-
-.container {
-  display: none;
-}
-
-.container.show {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  background: transparent;
-  color: var(--text-color);
-  border: none;
-  width: 500px;
-  height: 500px;
-  border-radius: 2em;
-  box-shadow: 0 0 5px white;
-  padding: 2em;
-  animation: 0.3s popUp ease-in forwards;
-  z-index: 1;
 }
 
 body > .welcome {
@@ -112,6 +93,7 @@ select {
   background-color: rgba(0, 0, 0, 0.479);
   transition: 0.3s box-shadow ease-in-out;
 }
+
 #form select {
   text-align: center;
   font-size: 1.5rem;
@@ -147,6 +129,7 @@ select,
 option:hover {
   background-color: rgba(255, 0, 0, 0.24);
 }
+
 #form input:focus,
 select:focus {
   border: 0;
@@ -174,10 +157,51 @@ select:focus {
   text-shadow: 0 0 5px lightcoral;
   transition: 0.5s color ease, 0.5s background-color ease-in-out;
 }
+
 .welcome > #form .play:hover {
   background-color: transparent;
   color: red;
   text-shadow: 0 0 5px;
+}
+
+.info {
+  display: none;
+}
+
+.info.show {
+  display: flex;
+  flex-direction: column;
+  color: white!important;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1em;
+  box-shadow: 0 0 12px white;
+  width: 300px;
+  height: 400px;
+  i{
+    font-size: 48px;
+  }
+  gap : 2em;
+}
+
+.container {
+  display: none;
+}
+
+.container.show {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background: transparent;
+  color: var(--text-color);
+  border: none;
+  width: 500px;
+  height: 500px;
+  border-radius: 2em;
+  box-shadow: 0 0 5px white;
+  padding: 2em;
+  animation: 0.3s popUp ease-in forwards;
+  z-index: 1;
 }
 
 .row {

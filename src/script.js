@@ -68,13 +68,25 @@ function start() {
     o: "circle",
   };
 
-  function mainGamePlayUI(yname, symbol) {
+  function mainGamePlayUI(yname, symbol, info) {
     const players = GameBoard.players(
       yname.textContent == "" ? "Player-1" : yname.textContent,
       symbol
     );
-    let player = players.getNewPlayer();
-    let computer = players.getComputer();
+
+    const player = players.getNewPlayer();
+    const computer = players.getComputer();
+    const playerinfo = [player, computer];
+    console.log(info);
+    try {
+      info.forEach((val, index) => {
+        val.firstElementChild.textContent = playerinfo[index].name;
+        val.lastElementChild.textContent =
+          symbolReference[playerinfo[index].symbol];
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
     const getCell = document.querySelectorAll(".row .col i");
 
     getCell.forEach((cell) => {
@@ -87,7 +99,7 @@ function start() {
           (cell.textContent == "") |
           (cell.textContent == symbolReference[player.symbol])
         ) {
-          cell.style.cursor = pointer;
+          cell.style.cursor = "pointer";
         } else {
           cell.style.cursor = "no-drop";
         }
@@ -105,13 +117,16 @@ function start() {
     const select = document.querySelector("#symbols");
     const yname = document.querySelector("#name");
 
+    const info = document.querySelectorAll(".info");
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       dialogWelcome.classList.add("animation");
       dialogWelcome.classList.add("hide");
       dialogContianer.classList.add("show");
+      info.forEach((e) => e.classList.add("show"));
       let symbol = select.value;
-      mainGamePlayUI(yname, symbol);
+      mainGamePlayUI(yname, symbol, info);
     });
   }
   // Add all the functions
