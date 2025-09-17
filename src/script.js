@@ -70,7 +70,7 @@ function start() {
 
   function mainGamePlayUI(yname, symbol, info) {
     const players = GameBoard.players(
-      yname.textContent == "" ? "Player-1" : yname.textContent,
+      yname == "" ? "Player-1" : yname,
       symbol
     );
 
@@ -115,7 +115,7 @@ function start() {
     const form = document.querySelector(".welcome>#form");
     // form inputs
     const select = document.querySelector("#symbols");
-    const yname = document.querySelector("#name");
+    const yname = document.querySelector("#input-name");
 
     const info = document.querySelectorAll(".info");
 
@@ -125,8 +125,15 @@ function start() {
       dialogWelcome.classList.add("hide");
       dialogContianer.classList.add("show");
       info.forEach((e) => e.classList.add("show"));
-      let symbol = select.value;
-      mainGamePlayUI(yname, symbol, info);
+      
+      try {
+        let pname = yname.value;
+        let symbol = select.value;
+        mainGamePlayUI(pname, symbol, info);
+      } catch (error) {
+        console.log(error.message);
+      }
+      
     });
   }
   // Add all the functions
