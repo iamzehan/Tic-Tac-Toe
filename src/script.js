@@ -62,27 +62,33 @@ function are2DArraysEqual(arr1, arr2) {
   return true; // All elements match
 }
 
-
-// We can create a new game
-const yname = prompt("Please enter your name: ");
-const symbol = ["x", "o"][
-  parseInt(prompt("1. x \n2. o\nEnter your symbol: ")) - 1
-];
-let players = GameBoard.players(yname == "" ? "Player-1" : yname, symbol);
-let player = players.getNewPlayer();
-let computer = players.getComputer();
-
-console.log(player, computer);
-// We can get a new board in every round
-for (let round = 1; round <= 5; round++) {
-  // with every round now I can get a fresh board
-  let board = GameBoard.getFreshBoard();
-  console.log("Start of Round - ", round);
-  console.log(board);
-  board[0][0] = player.symbol;
-  board[0][1] = computer.symbol;
-  console.log(board);
-  console.log("End of Round - ", round);
+function start() {
+  let symbolReference = {
+    x: "close",
+    o: "circle",
+  };
+  let yname;
+  let symbol = "o";
+  let players = GameBoard.players(yname == "" ? "Player-1" : yname, symbol);
+  let player = players.getNewPlayer();
+  let computer = players.getComputer();
+  const getCell = document.querySelectorAll(".row .col i");
+  getCell.forEach((cell) => {
+    cell.addEventListener("click", () => {
+      if (cell.textContent == "")
+        cell.textContent = symbolReference[player.symbol];
+    });
+    cell.addEventListener("mouseover", () => {
+      if (
+        (cell.textContent == "") |
+        (cell.textContent == symbolReference[player.symbol])
+      ) {
+        cell.style.cursor = pointer;
+      } else {
+        cell.style.cursor = "no-drop";
+      }
+    });
+  });
 }
 
-// console.log(player, computer, board);
+window.onload = start;
