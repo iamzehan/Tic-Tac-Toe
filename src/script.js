@@ -73,7 +73,7 @@ function start() {
 
   function mainGamePlayUI(yname, symbol, info) {
     const players = GameBoard.players(yname == "" ? "Player-1" : yname, symbol);
-
+    let board = GameBoard.getFreshBoard()
     const player = players.getNewPlayer();
     const computer = players.getComputer();
     const playerinfo = [player, computer];
@@ -88,11 +88,16 @@ function start() {
       console.log(error.message);
     }
     const getCell = document.querySelectorAll(".row .col");
-
     getCell.forEach((cell) => {
       cell.addEventListener("click", () => {
+        console.log(board);
         if (cell.firstElementChild.textContent == "") {
-          cell.firstElementChild.textContent = symbolReference[player.symbol];
+          let idx = cell
+            .getAttribute("data-index")
+            .split("")
+            .map((n) => parseInt(n-1));
+          board[idx[0]][idx[1]] = player.symbol;
+          cell.firstElementChild.textContent = symbolReference[board[idx[0]][idx[1]]];
           cell.firstElementChild.style.textShadow = `0px 5px 5px ${player.color}`;
         }
       });
