@@ -10,7 +10,10 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
+      rel="stylesheet"
+    />
     <script src="src/script.js" defer></script>
     <link
       rel="stylesheet"
@@ -20,32 +23,48 @@
     <style></style>
   </head>
   <body>
-
     <div class="info">
       <h4 id="name" class="name"></h4>
       <i id="icon" class="material-symbols-outlined"></i>
     </div>
     <div class="container">
-      <div class="row 1">
-        <div class="col"><i class="material-symbols-outlined"></i></div>
-        <div class="col"><i class="material-symbols-outlined"></i></div>
-        <div class="col"><i class="material-symbols-outlined"></i></div>
+      <div class="row one">
+        <div class="col one" data-index="11">
+          <i class="material-symbols-outlined"></i>
+        </div>
+        <div class="col two" data-index="12">
+          <i class="material-symbols-outlined"></i>
+        </div>
+        <div class="col three" data-index="13">
+          <i class="material-symbols-outlined"></i>
+        </div>
       </div>
-      <div class="row 2">
-        <div class="col 1"><i class="material-symbols-outlined"></i></div>
-        <div class="col 2"><i class="material-symbols-outlined"></i></div>
-        <div class="col 3"><i class="material-symbols-outlined"></i></div>
+      <div class="row one">
+        <div class="col one" data-index="21">
+          <i class="material-symbols-outlined"></i>
+        </div>
+        <div class="col two" data-index="22">
+          <i class="material-symbols-outlined"></i>
+        </div>
+        <div class="col three" data-index="23">
+          <i class="material-symbols-outlined"></i>
+        </div>
       </div>
-      <div class="row 3">
-        <div class="col 1"><i class="material-symbols-outlined"></i></div>
-        <div class="col 2"><i class="material-symbols-outlined"></i></div>
-        <div class="col 3"><i class="material-symbols-outlined"></i></div>
+      <div class="row two">
+        <div class="col one" data-index="31">
+          <i class="material-symbols-outlined"></i>
+        </div>
+        <div class="col two" data-index="32">
+          <i class="material-symbols-outlined"></i>
+        </div>
+        <div class="col three" data-index="33">
+          <i class="material-symbols-outlined"></i>
+        </div>
       </div>
     </div>
-
     <div class="info">
       <h4 id="name" class="name"></h4>
-      <i id = "icon" class="material-symbols-outlined"></i>
+      <i id="icon" class="material-symbols-outlined"></i>
     </div>
 
     <div class="landing">
@@ -55,7 +74,12 @@
       <h2>Tic Tac Toe</h2>
       <form action="" id="form">
         <label for="name">Name:</label>
-        <input type="text" name="name" id="input-name" placeholder="Your name" />
+        <input
+          type="text"
+          name="name"
+          id="input-name"
+          placeholder="Your name"
+        />
         <label for="symbols">Select Symbol:</label>
         <select name="symbols" id="symbols">
           <option value="x">x</option>
