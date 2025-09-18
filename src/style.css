@@ -58,13 +58,13 @@ body > .landing {
 
 .logo > span {
   font-size: 30px;
-  animation: glowNeon 1s infinite alternate;
+  animation: neonGlow 1s infinite alternate;
   position: fixed;
 }
 
 .landing h2 {
   font-family: "Press Start 2P", sans-serif;
-  animation: glowNeon 1s ease forwards;
+  animation: neonGlow 1s ease forwards;
 }
 
 #form {
@@ -138,6 +138,7 @@ select:focus {
 .landing > #form .btn {
   grid-column: 1 / span 2;
   align-self: center;
+  justify-self: center;
 }
 .landing > #form .play {
   justify-self: center;
@@ -176,10 +177,11 @@ select:focus {
   box-shadow: 0 0 12px white;
   width: 300px;
   height: 400px;
+  gap: 2em;
   i {
     font-size: 48px;
   }
-  gap: 2em;
+  
 }
 
 .container {
@@ -264,7 +266,7 @@ select:focus {
   }
 }
 
-@keyframes glowNeon {
+@keyframes neonGlow {
   from {
     color: white;
     text-shadow: 0 0 10px red;
