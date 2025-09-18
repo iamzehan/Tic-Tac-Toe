@@ -17,19 +17,22 @@ const GameBoard = (function () {
   let players = (playerName, symbol = "") => {
     // private
     let name = "";
-
+    let color = "";
     const getNewPlayer = () => {
       symbol = symbol == "" ? "x" : symbol;
       name = playerName;
-      return { name, symbol };
+      color = "green"
+      return { name, symbol, color };
     };
 
     const getComputer = () => {
       symbol = symbol == "x" ? "o" : "x";
       name = "Computer";
+      color = "red";
       return {
         name,
         symbol,
+        color
       };
     };
     return {
@@ -87,21 +90,22 @@ function start() {
     } catch (error) {
       console.log(error.message);
     }
-    const getCell = document.querySelectorAll(".row .col i");
+    const getCell = document.querySelectorAll(".row .col");
 
     getCell.forEach((cell) => {
       cell.addEventListener("click", () => {
-        if (cell.textContent == "")
-          cell.textContent = symbolReference[player.symbol];
+        if (cell.firstElementChild.textContent == "")
+          cell.firstElementChild.textContent = symbolReference[player.symbol];
+          cell.firstElementChild.style.textShadow = `0px 5px 5px ${player.color}`;
       });
       cell.addEventListener("mouseover", () => {
         if (
-          (cell.textContent == "") |
-          (cell.textContent == symbolReference[player.symbol])
+          (cell.firstElementChild.textContent == "") |
+          (cell.firstElementChild.textContent == symbolReference[player.symbol])
         ) {
-          cell.style.cursor = "pointer";
+          cell.firstElementChild.style.cursor = "pointer";
         } else {
-          cell.style.cursor = "no-drop";
+          cell.firstElementChild.style.cursor = "no-drop";
         }
       });
     });
