@@ -21,7 +21,7 @@ body {
   background-color: var(--bg-color);
 }
 
-body > .welcome {
+body > .landing {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,16 +36,16 @@ body > .welcome {
   animation: 0.3s popUp ease-out forwards;
 }
 
-.welcome.animation {
+.landing.animation {
   animation: 1s popOut ease-out forwards;
 }
 
-.welcome.animation.hide {
+.landing.animation.hide {
   display: none;
 }
 
-.welcome .logo {
-  background-color: rgba(255, 0, 0, 0.336);
+.landing .logo {
+  background-color: black;
   padding: 1em;
   height: 4em;
   width: 4em;
@@ -53,20 +53,18 @@ body > .welcome {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 5px -5px 12px 5px rgba(255, 255, 255, 0.281),
-  inset 12px 12px 10px 1px rgba(255, 255, 255, 0.24),
-  inset 12px 12px 3px 2px rgba(255, 255, 255, 0.123),
-  inset -1px -1px 1px 1px rgba(255, 255, 255, 0.123);
+  animation: glassEffect 2s infinite alternate;
 }
 
 .logo > span {
   font-size: 30px;
   animation: glowNeon 1s infinite alternate;
+  position: fixed;
 }
 
-.welcome h2 {
+.landing h2 {
   font-family: "Press Start 2P", sans-serif;
-  animation: glowNeon 0.3s infinite linear;
+  animation: glowNeon 1s ease forwards;
 }
 
 #form {
@@ -137,11 +135,11 @@ select:focus {
   box-shadow: 0 0 5px 0 red;
 }
 
-.welcome > #form .btn {
+.landing > #form .btn {
   grid-column: 1 / span 2;
   align-self: center;
 }
-.welcome > #form .play {
+.landing > #form .play {
   justify-self: center;
   background-color: red;
   width: 100px;
@@ -158,7 +156,7 @@ select:focus {
   transition: 0.5s color ease, 0.5s background-color ease-in-out;
 }
 
-.welcome > #form .play:hover {
+.landing > #form .play:hover {
   background-color: transparent;
   color: red;
   text-shadow: 0 0 5px;
@@ -171,17 +169,17 @@ select:focus {
 .info.show {
   display: flex;
   flex-direction: column;
-  color: white!important;
+  color: white !important;
   justify-content: center;
   align-items: center;
   border-radius: 1em;
   box-shadow: 0 0 12px white;
   width: 300px;
   height: 400px;
-  i{
+  i {
     font-size: 48px;
   }
-  gap : 2em;
+  gap: 2em;
 }
 
 .container {
@@ -267,12 +265,29 @@ select:focus {
 }
 
 @keyframes glowNeon {
-    from { 
+  from {
     color: white;
     text-shadow: 0 0 10px red;
-    }
-    to {
+  }
+  to {
     color: red;
     text-shadow: 0 0 5px red;
-    }
+  }
+}
+
+@keyframes glassEffect {
+  from {
+    box-shadow: inset 5px -5px 12px 5px rgba(255, 255, 255, 0.281),
+      inset 12px 12px 10px 1px rgba(255, 255, 255, 0.24),
+      inset 12px 12px 3px 2px rgba(255, 255, 255, 0.123),
+      inset -1px -1px 1px 1px rgba(255, 255, 255, 0.123),
+      inset 100px 100px 1px 5px rgba(255, 255, 255, 0);
+  }
+  to {
+    box-shadow: inset -5px 5px 12px 5px rgba(255, 255, 255, 0.281),
+      inset -12px -12px 10px 1px rgba(255, 255, 255, 0.24),
+      inset -12px -12px 3px 2px rgba(255, 255, 255, 0.123),
+      inset 1px 1px 1px 1px rgba(255, 255, 255, 0.123),
+      inset -50px -50px 1px 5px rgba(255, 255, 255, 0.1);
+  }
 }
