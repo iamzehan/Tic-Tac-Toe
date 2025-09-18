@@ -138,6 +138,7 @@ select:focus {
 .landing > #form .btn {
   grid-column: 1 / span 2;
   align-self: center;
+  justify-self: center;
 }
 .landing > #form .play {
   justify-self: center;
