@@ -21,7 +21,7 @@ const GameBoard = (function () {
     const getNewPlayer = () => {
       symbol = symbol == "" ? "x" : symbol;
       name = playerName;
-      color = "green"
+      color = "green";
       return { name, symbol, color };
     };
 
@@ -32,7 +32,7 @@ const GameBoard = (function () {
       return {
         name,
         symbol,
-        color
+        color,
       };
     };
     return {
@@ -72,10 +72,7 @@ function start() {
   };
 
   function mainGamePlayUI(yname, symbol, info) {
-    const players = GameBoard.players(
-      yname == "" ? "Player-1" : yname,
-      symbol
-    );
+    const players = GameBoard.players(yname == "" ? "Player-1" : yname, symbol);
 
     const player = players.getNewPlayer();
     const computer = players.getComputer();
@@ -94,9 +91,10 @@ function start() {
 
     getCell.forEach((cell) => {
       cell.addEventListener("click", () => {
-        if (cell.firstElementChild.textContent == "")
+        if (cell.firstElementChild.textContent == "") {
           cell.firstElementChild.textContent = symbolReference[player.symbol];
           cell.firstElementChild.style.textShadow = `0px 5px 5px ${player.color}`;
+        }
       });
       cell.addEventListener("mouseover", () => {
         if (
@@ -129,7 +127,7 @@ function start() {
       dialoglanding.classList.add("hide");
       dialogContianer.classList.add("show");
       info.forEach((e) => e.classList.add("show"));
-      
+
       try {
         let pname = yname.value;
         let symbol = select.value;
@@ -137,7 +135,6 @@ function start() {
       } catch (error) {
         console.log(error.message);
       }
-      
     });
   }
   // Add all the functions
