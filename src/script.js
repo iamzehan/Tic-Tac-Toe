@@ -77,7 +77,7 @@ function start() {
     const player = players.getNewPlayer();
     const computer = players.getComputer();
     const playerinfo = [player, computer];
-    console.log(info);
+
     try {
       info.forEach((val, index) => {
         val.firstElementChild.textContent = playerinfo[index].name;
@@ -87,11 +87,15 @@ function start() {
     } catch (error) {
       console.log(error.message);
     }
+    // get the cells in the board
     const getCell = document.querySelectorAll(".row .col");
+    let maxMove = 0;
+
     getCell.forEach((cell) => {
-      cell.addEventListener("click", () => {
-        console.log(board);
-        if (cell.firstElementChild.textContent == "") {
+      cell.addEventListener("click", function inputSymbol() {
+        try{console.log(maxMove+1);}catch(e){console.log(e.message)};
+        if (cell.firstElementChild.textContent == "" && maxMove<5) {
+          console.log(board);
           let idx = cell
             .getAttribute("data-index")
             .split("")
@@ -99,6 +103,10 @@ function start() {
           board[idx[0]][idx[1]] = player.symbol;
           cell.firstElementChild.textContent = symbolReference[board[idx[0]][idx[1]]];
           cell.firstElementChild.style.textShadow = `0px 5px 5px ${player.color}`;
+          maxMove+=1;
+        }
+        else {
+          cell.removeEventListener('click', inputSymbol);
         }
       });
       cell.addEventListener("mouseover", () => {
