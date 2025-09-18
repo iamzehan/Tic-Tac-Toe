@@ -17,19 +17,22 @@ const GameBoard = (function () {
   let players = (playerName, symbol = "") => {
     // private
     let name = "";
-
+    let color = "";
     const getNewPlayer = () => {
       symbol = symbol == "" ? "x" : symbol;
       name = playerName;
-      return { name, symbol };
+      color = "green";
+      return { name, symbol, color };
     };
 
     const getComputer = () => {
       symbol = symbol == "x" ? "o" : "x";
       name = "Computer";
+      color = "red";
       return {
         name,
         symbol,
+        color,
       };
     };
     return {
@@ -69,15 +72,12 @@ function start() {
   };
 
   function mainGamePlayUI(yname, symbol, info) {
-    const players = GameBoard.players(
-      yname == "" ? "Player-1" : yname,
-      symbol
-    );
-
+    const players = GameBoard.players(yname == "" ? "Player-1" : yname, symbol);
+    let board = GameBoard.getFreshBoard()
     const player = players.getNewPlayer();
     const computer = players.getComputer();
     const playerinfo = [player, computer];
-    console.log(info);
+
     try {
       info.forEach((val, index) => {
         val.firstElementChild.textContent = playerinfo[index].name;
@@ -87,21 +87,36 @@ function start() {
     } catch (error) {
       console.log(error.message);
     }
-    const getCell = document.querySelectorAll(".row .col i");
+    // get the cells in the board
+    const getCell = document.querySelectorAll(".row .col");
+    let maxMove = 0;
 
     getCell.forEach((cell) => {
-      cell.addEventListener("click", () => {
-        if (cell.textContent == "")
-          cell.textContent = symbolReference[player.symbol];
+      cell.addEventListener("click", function inputSymbol() {
+        try{console.log(maxMove+1);}catch(e){console.log(e.message)};
+        if (cell.firstElementChild.textContent == "" && maxMove<5) {
+          console.log(board);
+          let idx = cell
+            .getAttribute("data-index")
+            .split("")
+            .map((n) => parseInt(n-1));
+          board[idx[0]][idx[1]] = player.symbol;
+          cell.firstElementChild.textContent = symbolReference[board[idx[0]][idx[1]]];
+          cell.firstElementChild.style.textShadow = `0px 5px 5px ${player.color}`;
+          maxMove+=1;
+        }
+        else {
+          cell.removeEventListener('click', inputSymbol);
+        }
       });
       cell.addEventListener("mouseover", () => {
         if (
-          (cell.textContent == "") |
-          (cell.textContent == symbolReference[player.symbol])
+          (cell.firstElementChild.textContent == "") |
+          (cell.firstElementChild.textContent == symbolReference[player.symbol])
         ) {
-          cell.style.cursor = "pointer";
+          cell.firstElementChild.style.cursor = "pointer";
         } else {
-          cell.style.cursor = "no-drop";
+          cell.firstElementChild.style.cursor = "no-drop";
         }
       });
     });
@@ -125,7 +140,7 @@ function start() {
       dialoglanding.classList.add("hide");
       dialogContianer.classList.add("show");
       info.forEach((e) => e.classList.add("show"));
-      
+
       try {
         let pname = yname.value;
         let symbol = select.value;
@@ -133,7 +148,6 @@ function start() {
       } catch (error) {
         console.log(error.message);
       }
-      
     });
   }
   // Add all the functions
