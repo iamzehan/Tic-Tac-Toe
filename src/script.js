@@ -27,7 +27,7 @@ const GameBoard = (function () {
 
     const getComputer = () => {
       symbol = symbol == "x" ? "o" : "x";
-      name = "Computer";
+      name = "Player-2";
       color = "red";
       return {
         name,
@@ -65,54 +65,123 @@ function are2DArraysEqual(arr1, arr2) {
   return true; // All elements match
 }
 
+const GameController = (function () {
+  function checkWinner(board) {
+    const wins = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8], // rows
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8], // cols
+      [0, 4, 8],
+      [2, 4, 6], // diagonals
+    ];
+
+    for (let [a, b, c] of wins) {
+      if (board[a] !== " " && board[a] === board[b] && board[b] === board[c]) {
+        return board[a]; // "X" or "O"
+      }
+    }
+
+    if (!board.includes(" ")) {
+      return "draw";
+    }
+
+    return null; // game not finished
+  }
+
+  // Recursive function to generate game tree
+  function generateTree(board, player) {
+    const winner = checkWinner(board);
+    if (winner) {
+      return { board: [...board], result: winner, children: [] };
+    }
+    let nextPlayer;
+    let children = [];
+    for (let i = 0; i < board.length; i++) {
+      if (board[i] === " ") {
+        let newBoard = [...board];
+        newBoard[i] = player;
+        nextPlayer = player === "x" ? "o" : "x";
+      }
+    }
+
+    return { board: [...board], nextPlayer, result: null, children };
+  }
+  return {
+    generateTree,
+  };
+})();
+
 function start() {
-  let symbolReference = {
-    x: "close",
-    o: "circle",
+  const symbolReference = {
+    x: {
+      icon: "close",
+      "text-shadow": "red",
+    },
+    o: {
+      icon: "circle",
+      "text-shadow": "green",
+    },
+    draw: {
+      icon: "equal",
+    },
   };
 
   function mainGamePlayUI(yname, symbol, info) {
     const players = GameBoard.players(yname == "" ? "Player-1" : yname, symbol);
-    let board = GameBoard.getFreshBoard()
-    const player = players.getNewPlayer();
-    const computer = players.getComputer();
-    const playerinfo = [player, computer];
-
+    const playerInfo = [players.getNewPlayer(), players.getComputer()];
+    let board = Array(9).fill(" ");
+    let currentPlayer = symbol;
     try {
       info.forEach((val, index) => {
-        val.firstElementChild.textContent = playerinfo[index].name;
+        val.firstElementChild.textContent = playerInfo[index].name;
         val.lastElementChild.textContent =
-          symbolReference[playerinfo[index].symbol];
+          symbolReference[playerInfo[index].symbol].icon;
+        val.lastElementChild.style.textShadow = `0px 5px 5px ${
+          symbolReference[playerInfo[index].symbol]["text-shadow"]
+        }`;
       });
     } catch (error) {
       console.log(error.message);
     }
     // get the cells in the board
     const getCell = document.querySelectorAll(".row .col");
-    let maxMove = 0;
-
+    const showResult = document.querySelector(".result");
+    let result;
     getCell.forEach((cell) => {
       cell.addEventListener("click", function inputSymbol() {
-        try{console.log(maxMove+1);}catch(e){console.log(e.message)};
-        if (cell.firstElementChild.textContent == "" && maxMove<5) {
-          console.log(board);
-          let idx = cell
-            .getAttribute("data-index")
-            .split("")
-            .map((n) => parseInt(n-1));
-          board[idx[0]][idx[1]] = player.symbol;
-          cell.firstElementChild.textContent = symbolReference[board[idx[0]][idx[1]]];
-          cell.firstElementChild.style.textShadow = `0px 5px 5px ${player.color}`;
-          maxMove+=1;
-        }
-        else {
-          cell.removeEventListener('click', inputSymbol);
+        if (cell.firstElementChild.textContent == "" && !result) {
+          let idx = cell.getAttribute("data-index");
+          board[idx] = currentPlayer;
+          cell.firstElementChild.textContent = symbolReference[board[idx]].icon;
+          cell.firstElementChild.style.textShadow = `0px 5px 5px ${symbolReference[currentPlayer]["text-shadow"]}`;
+          let game = GameController.generateTree(board, currentPlayer);
+          result = game.result;
+          if (result === null) {
+            currentPlayer = game.nextPlayer;
+            if (currentPlayer === playerInfo[0].symbol) {
+              document.querySelector(".info.one").classList.add("current");
+              document.querySelector(".info.two").classList.remove("current");
+            } else {
+              document.querySelector(".info.one").classList.remove("current");
+              document.querySelector(".info.two").classList.add("current");
+            }
+          } else {
+            showResult.firstElementChild.firstElementChild.textContent =
+              symbolReference[result].icon;
+            showResult.showModal();
+          }
+        } else {
+          cell.removeEventListener("click", inputSymbol);
         }
       });
+
       cell.addEventListener("mouseover", () => {
         if (
           (cell.firstElementChild.textContent == "") |
-          (cell.firstElementChild.textContent == symbolReference[player.symbol])
+          (cell.firstElementChild.textContent == symbolReference[currentPlayer])
         ) {
           cell.firstElementChild.style.cursor = "pointer";
         } else {
