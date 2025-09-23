@@ -85,7 +85,7 @@ const GameController = (function () {
     }
 
     if (!board.includes(" ")) {
-      return "Draw";
+      return "draw";
     }
 
     return null; // game not finished
@@ -124,8 +124,11 @@ function start() {
       icon: "circle",
       "text-shadow": "green",
     },
+    draw: {
+      icon: "equal",
+    }
   };
-
+  
   function mainGamePlayUI(yname, symbol, info) {
     const players = GameBoard.players(yname == "" ? "Player-1" : yname, symbol);
     const playerInfo = [players.getNewPlayer(), players.getComputer()];
@@ -160,7 +163,7 @@ function start() {
             currentPlayer = game.nextPlayer;
           }
           else {
-            showResult.firstElementChild.textContent = symbolReference[currentPlayer].icon;
+            showResult.firstElementChild.firstElementChild.textContent = symbolReference[result].icon;
             showResult.showModal();
           }
         } else {
