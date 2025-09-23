@@ -46,25 +46,6 @@ const GameBoard = (function () {
   };
 })();
 
-// compare win cases to the current
-function are2DArraysEqual(arr1, arr2) {
-  if (arr1.length !== arr2.length) {
-    return false; // Different number of rows
-  }
-
-  for (let i = 0; i < arr1.length; i++) {
-    if (arr1[i].length !== arr2[i].length) {
-      return false; // Different number of columns in a row
-    }
-    for (let j = 0; j < arr1[i].length; j++) {
-      if (arr1[i][j] !== arr2[i][j]) {
-        return false; // Elements do not match
-      }
-    }
-  }
-  return true; // All elements match
-}
-
 const GameController = (function () {
   function checkWinner(board) {
     const wins = [
@@ -91,7 +72,6 @@ const GameController = (function () {
     return null; // game not finished
   }
 
-  // Recursive function to generate game tree
   function generateTree(board, player) {
     const winner = checkWinner(board);
     if (winner) {
