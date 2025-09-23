@@ -145,27 +145,29 @@ function start() {
     }
     // get the cells in the board
     const getCell = document.querySelectorAll(".row .col");
-    const showResult = document.querySelectorAll(".result");
+    const showResult = document.querySelector(".result");
+    let result;
     getCell.forEach((cell) => {
       cell.addEventListener("click", function inputSymbol() {
-        if (cell.firstElementChild.textContent == "") {
+        if (cell.firstElementChild.textContent == "" && !result) {
           let idx = cell.getAttribute("data-index");
           board[idx] = currentPlayer;
           cell.firstElementChild.textContent = symbolReference[board[idx]].icon;
           cell.firstElementChild.style.textShadow = `0px 5px 5px ${symbolReference[currentPlayer]["text-shadow"]}`;
           let game = GameController.generateTree(board, currentPlayer);
-          try {
+          result = game.result;
+          if (result===null){
             currentPlayer = game.nextPlayer;
           }
-          catch {
-            showResult.firstElementChild.textContent = game.result;
+          else {
+            showResult.firstElementChild.textContent = symbolReference[currentPlayer].icon;
             showResult.showModal();
           }
-
         } else {
           cell.removeEventListener("click", inputSymbol);
         }
       });
+      
       cell.addEventListener("mouseover", () => {
         if (
           (cell.firstElementChild.textContent == "") |
