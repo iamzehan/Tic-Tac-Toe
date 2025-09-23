@@ -263,10 +263,16 @@ select:focus {
   justify-content: center;
   align-items: center;
   justify-self: center;
+  align-self: center;
   z-index: 1000;
   animation: 0.4s popUp ease-in forwards;
 }
 
+.result::backdrop {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px); /* Apply a blur effect */
+}
 @keyframes popUp {
   from {
     opacity: 0;
