@@ -110,7 +110,7 @@ const GameController = (function () {
     return { board: [...board], nextPlayer, result: null, children };
   }
   return {
-    generateTree
+    generateTree,
   };
 })();
 
@@ -126,9 +126,9 @@ function start() {
     },
     draw: {
       icon: "equal",
-    }
+    },
   };
-  
+
   function mainGamePlayUI(yname, symbol, info) {
     const players = GameBoard.players(yname == "" ? "Player-1" : yname, symbol);
     const playerInfo = [players.getNewPlayer(), players.getComputer()];
@@ -159,18 +159,25 @@ function start() {
           cell.firstElementChild.style.textShadow = `0px 5px 5px ${symbolReference[currentPlayer]["text-shadow"]}`;
           let game = GameController.generateTree(board, currentPlayer);
           result = game.result;
-          if (result===null){
+          if (result === null) {
             currentPlayer = game.nextPlayer;
-          }
-          else {
-            showResult.firstElementChild.firstElementChild.textContent = symbolReference[result].icon;
+            if (currentPlayer === playerInfo[0].symbol) {
+              document.querySelector(".info.one").classList.add("current");
+              document.querySelector(".info.two").classList.remove("current");
+            } else {
+              document.querySelector(".info.one").classList.remove("current");
+              document.querySelector(".info.two").classList.add("current");
+            }
+          } else {
+            showResult.firstElementChild.firstElementChild.textContent =
+              symbolReference[result].icon;
             showResult.showModal();
           }
         } else {
           cell.removeEventListener("click", inputSymbol);
         }
       });
-      
+
       cell.addEventListener("mouseover", () => {
         if (
           (cell.firstElementChild.textContent == "") |

@@ -188,6 +188,15 @@ select:focus {
   }
 }
 
+.info.one.current{
+  animation: boxGlow 0.3s infinite alternate;
+}
+
+.info.two.current{
+  animation: boxGlow 0.3s infinite alternate;
+}
+
+
 .container {
   display: none;
 }
@@ -279,6 +288,8 @@ dialog.result::backdrop {
   
 }
 
+
+
 @keyframes popUp {
   from {
     opacity: 0;
@@ -309,6 +320,15 @@ dialog.result::backdrop {
   to {
     color: red;
     text-shadow: 0 0 5px red;
+  }
+}
+
+@keyframes boxGlow {
+  from {
+    box-shadow: 0 0 10px red;
+  }
+  to {
+    box-shadow: 0 0 5px 5px red;
   }
 }
 
