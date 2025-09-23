@@ -65,6 +65,53 @@ function are2DArraysEqual(arr1, arr2) {
   return true; // All elements match
 }
 
+const GameController = function () {
+  function checkWinner(board) {
+    const wins = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8], // rows
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8], // cols
+      [0, 4, 8],
+      [2, 4, 6], // diagonals
+    ];
+
+    for (let [a, b, c] of wins) {
+      if (board[a] !== " " && board[a] === board[b] && board[b] === board[c]) {
+        return board[a]; // "X" or "O"
+      }
+    }
+
+    if (!board.includes(" ")) {
+      return "Draw";
+    }
+
+    return null; // game not finished
+  }
+
+  // Recursive function to generate game tree
+  function generateTree(board, player) {
+    const winner = checkWinner(board);
+    if (winner) {
+      return { board: [...board], result: winner, children: [] };
+    }
+
+    let children = [];
+    for (let i = 0; i < board.length; i++) {
+      if (board[i] === " ") {
+        let newBoard = [...board];
+        newBoard[i] = player;
+        const nextPlayer = player === "X" ? "O" : "X";
+        children.push(generateTree(newBoard, nextPlayer));
+      }
+    }
+
+    return { board: [...board], result: null, children };
+  }
+}
+
 function start() {
   let symbolReference = {
     x: "close",
@@ -73,11 +120,9 @@ function start() {
 
   function mainGamePlayUI(yname, symbol, info) {
     const players = GameBoard.players(yname == "" ? "Player-1" : yname, symbol);
-    let board = GameBoard.getFreshBoard()
     const player = players.getNewPlayer();
     const computer = players.getComputer();
     const playerinfo = [player, computer];
-
     try {
       info.forEach((val, index) => {
         val.firstElementChild.textContent = playerinfo[index].name;
@@ -93,20 +138,24 @@ function start() {
 
     getCell.forEach((cell) => {
       cell.addEventListener("click", function inputSymbol() {
-        try{console.log(maxMove+1);}catch(e){console.log(e.message)};
-        if (cell.firstElementChild.textContent == "" && maxMove<5) {
+        try {
+          console.log(maxMove + 1);
+        } catch (e) {
+          console.log(e.message);
+        }
+        if (cell.firstElementChild.textContent == "" && maxMove < 5) {
           console.log(board);
           let idx = cell
             .getAttribute("data-index")
             .split("")
-            .map((n) => parseInt(n-1));
+            .map((n) => parseInt(n - 1));
           board[idx[0]][idx[1]] = player.symbol;
-          cell.firstElementChild.textContent = symbolReference[board[idx[0]][idx[1]]];
+          cell.firstElementChild.textContent =
+            symbolReference[board[idx[0]][idx[1]]];
           cell.firstElementChild.style.textShadow = `0px 5px 5px ${player.color}`;
-          maxMove+=1;
-        }
-        else {
-          cell.removeEventListener('click', inputSymbol);
+          maxMove += 1;
+        } else {
+          cell.removeEventListener("click", inputSymbol);
         }
       });
       cell.addEventListener("mouseover", () => {
