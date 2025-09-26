@@ -1,25 +1,19 @@
-//Let's take an IIFE or module Gameboard which would give us a fresh board on demand
-// and create a player along with the computer entity when invoked
 const CreatePlayer = (function () {
   let players = (playerName, symbol = "") => {
     // private
     let name = "";
-    let color = "";
     const getNewPlayer = () => {
       symbol = symbol == "" ? "x" : symbol;
       name = playerName;
-      color = "green";
-      return { name, symbol, color };
+      return { name, symbol };
     };
 
     const getComputer = () => {
       symbol = symbol == "x" ? "o" : "x";
       name = "Player-2";
-      color = "red";
       return {
         name,
         symbol,
-        color,
       };
     };
     return {
@@ -28,7 +22,7 @@ const CreatePlayer = (function () {
     };
   };
   return {
-    players
+    players,
   };
 })();
 
@@ -85,18 +79,24 @@ function start() {
     x: {
       icon: "close",
       "text-shadow": "red",
+      message: `Wins!`,
     },
     o: {
       icon: "circle",
       "text-shadow": "green",
+      message: `Wins!`,
     },
     draw: {
       icon: "equal",
+      message: `It's a Draw!`,
     },
   };
 
   function mainGamePlayUI(yname, symbol, info) {
-    const players = CreatePlayer.players(yname == "" ? "Player-1" : yname, symbol);
+    const players = CreatePlayer.players(
+      yname == "" ? "Player-1" : yname,
+      symbol
+    );
     const playerInfo = [players.getNewPlayer(), players.getComputer()];
     let board = Array(9).fill(" ");
     let currentPlayer = symbol;
@@ -137,6 +137,8 @@ function start() {
           } else {
             showResult.firstElementChild.firstElementChild.textContent =
               symbolReference[result].icon;
+            showResult.firstElementChild.lastElementChild.textContent =
+              symbolReference[result].message;
             showResult.showModal();
           }
         } else {
