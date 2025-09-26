@@ -92,6 +92,16 @@ function start() {
     },
   };
 
+  function setBlinkers(playerInfo, currentPlayer) {
+    if (currentPlayer === playerInfo[0].symbol) {
+      document.querySelector(".info.one").classList.add("current");
+      document.querySelector(".info.two").classList.remove("current");
+    } else {
+      document.querySelector(".info.one").classList.remove("current");
+      document.querySelector(".info.two").classList.add("current");
+    }
+  }
+
   function mainGamePlayUI(yname, symbol, info) {
     const players = CreatePlayer.players(
       yname == "" ? "Player-1" : yname,
@@ -100,6 +110,7 @@ function start() {
     const playerInfo = [players.getNewPlayer(), players.getComputer()];
     let board = Array(9).fill(" ");
     let currentPlayer = symbol;
+    setBlinkers(playerInfo, currentPlayer);
     try {
       info.forEach((val, index) => {
         val.firstElementChild.textContent = playerInfo[index].name;
@@ -127,13 +138,8 @@ function start() {
           result = game.result;
           if (result === null) {
             currentPlayer = game.nextPlayer;
-            if (currentPlayer === playerInfo[0].symbol) {
-              document.querySelector(".info.one").classList.add("current");
-              document.querySelector(".info.two").classList.remove("current");
-            } else {
-              document.querySelector(".info.one").classList.remove("current");
-              document.querySelector(".info.two").classList.add("current");
-            }
+            // set the blinkers
+            setBlinkers(playerInfo, currentPlayer);
           } else {
             showResult.firstElementChild.firstElementChild.textContent =
               symbolReference[result].icon;
