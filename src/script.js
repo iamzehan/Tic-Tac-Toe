@@ -1,19 +1,6 @@
 //Let's take an IIFE or module Gameboard which would give us a fresh board on demand
 // and create a player along with the computer entity when invoked
-const GameBoard = (function () {
-  const getFreshBoard = () => {
-    let arr = [];
-    const n = 3;
-    for (let i = 1; i <= n; i++) {
-      let inside = [];
-      for (let j = 1; j <= n; j++) {
-        inside.push("");
-      }
-      arr.push(inside);
-    }
-    return arr;
-  };
-
+const CreatePlayer = (function () {
   let players = (playerName, symbol = "") => {
     // private
     let name = "";
@@ -41,8 +28,7 @@ const GameBoard = (function () {
     };
   };
   return {
-    getFreshBoard,
-    players,
+    players
   };
 })();
 
@@ -110,7 +96,7 @@ function start() {
   };
 
   function mainGamePlayUI(yname, symbol, info) {
-    const players = GameBoard.players(yname == "" ? "Player-1" : yname, symbol);
+    const players = CreatePlayer.players(yname == "" ? "Player-1" : yname, symbol);
     const playerInfo = [players.getNewPlayer(), players.getComputer()];
     let board = Array(9).fill(" ");
     let currentPlayer = symbol;
